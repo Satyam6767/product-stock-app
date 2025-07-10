@@ -6,7 +6,19 @@ const productRoutes = require('./routes/productRoutes');
 require('dotenv').config(); // 👈 Load env variables
 
 const app = express();
-app.use(cors());
+
+// ✅ Allow only your Vercel frontend
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://product-stock-frontend.vercel.app'
+];
+
+app.use(cors({
+  origin: allowedOrigins,
+  methods: ['GET', 'POST', 'PUT'],
+  credentials: true
+}));
+
 app.use(express.json());
 
 // ✅ Use MongoDB URI from .env
