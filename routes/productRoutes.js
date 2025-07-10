@@ -1,9 +1,9 @@
-// routes/productRoutes.js
+
 const express = require('express');
 const router = express.Router();
 const Product = require('../models/Product');
 
-// ✅ Generate 50 random products
+
 router.post('/generate', async (req, res) => {
   try {
     await Product.deleteMany(); // Optional: clean old data
@@ -28,7 +28,6 @@ router.post('/generate', async (req, res) => {
 
 
 
-// GET: Fetch products with pagination
 router.get('/', async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
@@ -51,10 +50,6 @@ router.get('/', async (req, res) => {
 
 
 
-
-
-
-// GET: Sort by productName (ascending)
 router.get('/sort-name', async (req, res) => {
   try {
     const products = await Product.find().sort({ productName: 1 });
@@ -69,8 +64,6 @@ router.get('/sort-name', async (req, res) => {
 
 
 
-
-// GET: Sort by stockOnHand (descending)
 router.get('/sort-stock-desc', async (req, res) => {
   try {
     const products = await Product.find().sort({ stockOnHand: -1 });
@@ -83,7 +76,7 @@ router.get('/sort-stock-desc', async (req, res) => {
 
 
 
-// PUT: Decrease stock by 2 for all products
+
 router.put('/decrease-stock', async (req, res) => {
   try {
     const products = await Product.find();
@@ -102,7 +95,6 @@ router.put('/decrease-stock', async (req, res) => {
 
 
 
-// PUT: Increase stock by 2 for items ending in even number
 router.put('/increase-even-stock', async (req, res) => {
   try {
     const products = await Product.find();
